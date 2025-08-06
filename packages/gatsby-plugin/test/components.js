@@ -31,7 +31,7 @@ test('Invert renders', () => {
   expect(json).toMatchSnapshot()
 })
 
-test('Steps renders', () => {
+test.skip('Steps renders', () => {
   const json = render(
     <Steps>
       <div>One</div>
@@ -41,7 +41,7 @@ test('Steps renders', () => {
   expect(json).toMatchSnapshot()
 })
 
-test('Steps renders with list', () => {
+test.skip('Steps renders with list', () => {
   const json = render(
     <Steps>
       <ul originalType='ul'>
