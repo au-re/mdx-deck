@@ -1,5 +1,5 @@
 const path = require('path')
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
 const mkdirp = require('mkdirp')
 
 module.exports = async ({ url, outFile, width, height, sandbox }) => {
