@@ -1,5 +1,5 @@
 import path from 'path'
-import puppeteer from 'puppeteer-core'
+import puppeteer from 'puppeteer'
 import mkdirp from 'mkdirp'
 
 export default async ({ url, outFile, width, height, sandbox }) => {
@@ -12,7 +12,7 @@ export default async ({ url, outFile, width, height, sandbox }) => {
     args.push('--no-sandbox', '--disable-setuid-sandbox')
   }
 
-  const browser = await puppeteer.launch({ args })
+  const browser = await puppeteer.launch({ headless: 'new', args })
   const page = await browser.newPage()
   const filename = path.resolve(outFile)
   const outDir = path.dirname(filename)

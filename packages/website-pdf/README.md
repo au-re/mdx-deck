@@ -1,8 +1,8 @@
 # website-pdf
 
-Save a URL as a PDF using [puppeteer-core](https://pptr.dev/).
+Save a URL as a PDF using [Puppeteer](https://pptr.dev/).
 
-You'll need to have a Chromium or Chrome executable available on your system. If you want Puppeteer to download its own browser, install the `puppeteer` package separately.
+Puppeteer will download a compatible version of Chromium when installed.
 
 ```sh
 npm i -D website-pdf
