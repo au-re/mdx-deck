@@ -25,7 +25,9 @@ const config = (opts = {}) => {
         resolve: 'gatsby-plugin-mdx',
         options: {
           gatsbyRemarkPlugins,
-          remarkPlugins,
+          mdxOptions: {
+            remarkPlugins,
+          },
         },
       },
       'gatsby-plugin-react-helmet',
