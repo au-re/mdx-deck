@@ -7,11 +7,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const remarkPlugins = [
-  remarkImages,
-  remarkUnwrapImages,
-  remarkEmoji,
-]
+const remarkPlugins = [remarkImages, remarkUnwrapImages, remarkEmoji]
 
 export const onPreBootstrap = ({}, opts = {}) => {
   opts.dirname = opts.dirname || __dirname
@@ -20,12 +16,12 @@ export const onPreBootstrap = ({}, opts = {}) => {
 
   if (fs.existsSync('./static')) {
     // remove temp directory
-    fs.unlinkSync('./static')
+    fs.rmSync('./static', { recursive: true, force: true })
   }
 
   if (hasStaticDir) {
     // link to source static directory
-    fs.symlinkSync(staticSourceDir, './static')
+    fs.symlinkSync(staticSourceDir, './static', 'junction')
   }
 }
 
@@ -47,22 +43,18 @@ export const onCreateWebpackConfig = ({
               loader: '@mdx-js/loader',
               options: {
                 remarkPlugins,
-              }
+              },
             },
-          ]
-        }
-      ]
-    }
+          ],
+        },
+      ],
+    },
   })
 }
 
 export const resolvableExtensions = () => ['.mdx']
 
-export const createPages = ({
-  actions,
-}, {
-  path: source,
-} = {}) => {
+export const createPages = ({ actions }, { path: source } = {}) => {
   if (!source) return
 
   actions.createPage({
