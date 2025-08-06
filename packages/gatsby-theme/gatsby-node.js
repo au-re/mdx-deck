@@ -1,9 +1,12 @@
 // based on gatsby-theme-blog
-const fs = require(`fs`)
-const path = require(`path`)
-const mkdirp = require(`mkdirp`)
-const Debug = require(`debug`)
-const pkg = require('./package.json')
+import fs from 'fs'
+import path from 'path'
+import mkdirp from 'mkdirp'
+import Debug from 'debug'
+import { createRequire } from 'module'
+import pkg from './package.json' with { type: 'json' }
+
+const require = createRequire(import.meta.url)
 
 const debug = Debug(pkg.name)
 
@@ -13,7 +16,7 @@ let contentPath
 const DeckTemplate = require.resolve(`./src/templates/deck`)
 const DecksTemplate = require.resolve(`./src/templates/decks`)
 
-exports.onPreBootstrap = ({ store }, opts = {}) => {
+export const onPreBootstrap = ({ store }, opts = {}) => {
   const { program } = store.getState()
 
   basePath = opts.basePath || `/`
@@ -49,7 +52,7 @@ const resolveTitle = async (...args) => {
   return first.value || ''
 }
 
-exports.createSchemaCustomization = ({ actions, schema }) => {
+export const createSchemaCustomization = ({ actions, schema }) => {
   actions.createTypes(
     schema.buildObjectType({
       name: `Deck`,
@@ -72,7 +75,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
   )
 }
 
-exports.createPages = async ({ graphql, actions, reporter, pathPrefix }) => {
+export const createPages = async ({ graphql, actions, reporter, pathPrefix }) => {
   const { createPage } = actions
 
   const result = await graphql(`
@@ -157,7 +160,7 @@ exports.createPages = async ({ graphql, actions, reporter, pathPrefix }) => {
   })
 }
 
-exports.onCreateNode = ({
+export const onCreateNode = ({
   node,
   actions,
   getNode,
@@ -197,7 +200,7 @@ exports.onCreateNode = ({
   createParentChildLink({ parent: fileNode, child: getNode(id) })
 }
 
-exports.onCreateDevServer = ({ app }) => {
+export const onCreateDevServer = ({ app }) => {
   if (typeof process.send !== 'function') return
   process.send({
     mdxDeck: true,

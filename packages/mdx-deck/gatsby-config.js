@@ -1,9 +1,9 @@
-const path = require('path')
+import path from 'path'
 
 const src = process.env.__SRC__
 const dirname = path.dirname(src)
 
-module.exports = {
+export default {
   plugins: [
     {
       resolve: '@mdx-deck/gatsby-plugin',

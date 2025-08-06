@@ -1,8 +1,8 @@
-const path = require('path')
-const puppeteer = require('puppeteer-core')
-const mkdirp = require('mkdirp')
+import path from 'path'
+import puppeteer from 'puppeteer-core'
+import mkdirp from 'mkdirp'
 
-module.exports = async ({ url, outFile, width, height, sandbox }) => {
+export default async ({ url, outFile, width, height, sandbox }) => {
   if (!url) {
     throw new Error('URL is required for website-pdf')
   }

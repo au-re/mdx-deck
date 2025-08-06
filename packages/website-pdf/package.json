@@ -4,6 +4,7 @@
   "author": "Brent Jackson <jxnblk@gmail.com>",
   "license": "MIT",
   "bin": "./cli.js",
+  "type": "module",
   "scripts": {
     "test": "./cli.js http://localhost:8000/print -o ../../docs/dist"
   },

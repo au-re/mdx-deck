@@ -1,6 +1,9 @@
 #!/usr/bin/env node
-const path = require('path')
-const meow = require('meow')
+import generatePdf from './index.js'
+import { createRequire } from 'module'
+
+const cjs = createRequire(import.meta.url)
+const meow = cjs('meow')
 
 const cli = meow(
   `
@@ -51,7 +54,7 @@ const opts = Object.assign({}, cli.flags, {
   url,
 })
 
-require('./index')(opts)
+generatePdf(opts)
   .then(filename => {
     console.log(`saved PDF to`, filename)
     process.exit(0)

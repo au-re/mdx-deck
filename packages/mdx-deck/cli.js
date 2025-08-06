@@ -1,10 +1,16 @@
 #!/usr/bin/env node
-const path = require('path')
-const meow = require('meow')
-const execa = require('execa')
-const chalk = require('chalk')
-const fs = require('fs-extra')
-const pkg = require('./package.json')
+import path from 'path'
+import execa from 'execa'
+import chalk from 'chalk'
+import fs from 'fs-extra'
+import pkg from './package.json' with { type: 'json' }
+import { fileURLToPath } from 'url'
+import { createRequire } from 'module'
+
+const cjs = createRequire(import.meta.url)
+const meow = cjs('meow')
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const log = (...args) => {
   console.log(chalk.green('[mdx-deck]'), ...args)
@@ -77,10 +83,10 @@ const gatsby = async (...args) => {
 switch (cmd) {
   case 'build':
     gatsby('build').then(() => {
-      const public = path.join(__dirname, 'public')
+      const publicDir = path.join(__dirname, 'public')
       const dist = path.join(process.cwd(), 'public')
-      if (public === dist) return
-      fs.copySync(public, dist)
+      if (publicDir === dist) return
+      fs.copySync(publicDir, dist)
     })
     break
   case 'dev':
