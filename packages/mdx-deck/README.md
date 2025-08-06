@@ -36,14 +36,15 @@ Award-winning React [MDX][]-based presentation decks
 
 ## Getting Started
 
+Requires Node.js v22 or higher.
+
 ```sh
 npm i -D mdx-deck
 ```
 
 Create an [MDX][] file and separate each slide with `---`.
 
-````mdx
-
+```mdx
 # Hello
 
 ---
@@ -53,8 +54,7 @@ Create an [MDX][] file and separate each slide with `---`.
 ---
 
 ## The End
-
-````
+```
 
 Add a run script to your `package.json` with the MDX Deck CLI
 pointing to the `.mdx` file to start the development server:
@@ -130,7 +130,7 @@ _Note: please check with version compatibility when using these libraries._
 ## Layouts
 
 Each slide can include a custom layout around its content,
-which can be used as a *template* for visually differentiating slides.
+which can be used as a _template_ for visually differentiating slides.
 
 ```js
 // example Layout.js
@@ -168,7 +168,7 @@ or style child elements with CSS-in-JS.
 
 ## Presenter Mode
 
-Press `Option + P` to toggle *Presenter Mode*,
+Press `Option + P` to toggle _Presenter Mode_,
 which will show a preview of the next slide, a timer, and speaker notes.
 
 ![presenter mode screenshot](docs/images/presenter-mode.png)
@@ -178,13 +178,13 @@ and it will stay in sync with the other window.
 
 ## Keyboard Shortcuts
 
-| Key         | Description                                  |
-| ----------- | -------------------------------------------- |
-| Left Arrow, Page Up, Shift + Space  | Go to previous slide (or step in [Steps][]) |
-| Right Arrow, Page Down, Space | Go to next slide (or step in [Steps][])     |
-| Option + P  | Toggle [Presenter Mode](#presenter-mode)     |
-| Option + O  | Toggle Overview Mode
-| Option + G  | Toggle Grid Mode
+| Key                                | Description                                 |
+| ---------------------------------- | ------------------------------------------- |
+| Left Arrow, Page Up, Shift + Space | Go to previous slide (or step in [Steps][]) |
+| Right Arrow, Page Down, Space      | Go to next slide (or step in [Steps][])     |
+| Option + P                         | Toggle [Presenter Mode](#presenter-mode)    |
+| Option + O                         | Toggle Overview Mode                        |
+| Option + G                         | Toggle Grid Mode                            |
 
 [steps]: docs/components.md#steps
 
@@ -213,7 +213,6 @@ and it will stay in sync with the other window.
 [harry wolff]: https://mobile.twitter.com/hswolff
 [ks-egghead]: https://egghead.io/lessons/javascript-build-a-custom-provider-component-for-mdx-deck
 [kyle shevlin]: https://twitter.com/kyleshevlin
-
 
 ## Examples
 
@@ -257,6 +256,7 @@ The following examples will open in CodeSandbox.
 [theme ui]: https://theme-ui.com
 
 <!-- examples -->
+
 [design-systems-react]: https://github-ds.now.sh/#0
 [brazil-now]: https://braziljs.now.sh
 [simplify-react]: https://simply-react.netlify.com/#0

@@ -2,6 +2,8 @@
 
 This was generated with [mdx-deck][]'s `npm init deck` command.
 
+Requires Node.js v22 or higher.
+
 ## Development
 
 To run the presentation deck in development mode:
