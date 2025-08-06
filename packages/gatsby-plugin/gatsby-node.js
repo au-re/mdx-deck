@@ -1,13 +1,19 @@
-const fs = require('fs')
-const path = require('path')
-const { createPath, validatePath } = require('gatsby-page-utils')
+import fs from 'fs'
+import path from 'path'
+import remarkImages from 'remark-images'
+import remarkUnwrapImages from 'remark-unwrap-images'
+import remarkEmoji from 'remark-emoji'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
 const remarkPlugins = [
-  require('remark-images'),
-  require('remark-unwrap-images'),
-  require('remark-emoji'),
+  remarkImages,
+  remarkUnwrapImages,
+  remarkEmoji,
 ]
 
-exports.onPreBootstrap = ({}, opts = {}) => {
+export const onPreBootstrap = ({}, opts = {}) => {
   opts.dirname = opts.dirname || __dirname
   const staticSourceDir = path.join(opts.dirname, 'static')
   const hasStaticDir = fs.existsSync(staticSourceDir)
@@ -23,7 +29,7 @@ exports.onPreBootstrap = ({}, opts = {}) => {
   }
 }
 
-exports.onCreateWebpackConfig = ({
+export const onCreateWebpackConfig = ({
   stage,
   rules,
   loaders,
@@ -50,9 +56,9 @@ exports.onCreateWebpackConfig = ({
   })
 }
 
-exports.resolvableExtensions = () => ['.mdx']
+export const resolvableExtensions = () => ['.mdx']
 
-exports.createPages = ({
+export const createPages = ({
   actions,
 }, {
   path: source,

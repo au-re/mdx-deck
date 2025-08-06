@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-const fs = require('fs')
-const path = require('path')
-const meow = require('meow')
-const chalk = require('chalk')
-const initit = require('initit')
+import chalk from 'chalk'
+import initit from 'initit'
+import { createRequire } from 'module'
+
+const cjs = createRequire(import.meta.url)
+const meow = cjs('meow')
 
 const logo = chalk.magenta('[mdx-deck]')
 const log = (...args) => {

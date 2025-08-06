@@ -1,6 +1,12 @@
+import remarkUnwrapImages from 'remark-unwrap-images'
+import remarkEmoji from 'remark-emoji'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 const IS_LOCAL = process.cwd() === __dirname
 
-const remarkPlugins = [require('remark-unwrap-images'), require('remark-emoji')]
+const remarkPlugins = [remarkUnwrapImages, remarkEmoji]
 const gatsbyRemarkPlugins = [`gatsby-remark-import-code`]
 
 const config = (opts = {}) => {
@@ -36,4 +42,4 @@ const config = (opts = {}) => {
   }
 }
 
-module.exports = IS_LOCAL ? config() : config
+export default IS_LOCAL ? config() : config

@@ -3,6 +3,7 @@
   "name": "@mdx-deck/gatsby-starter",
   "version": "4.1.0",
   "main": "index.js",
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "start": "gatsby develop",
