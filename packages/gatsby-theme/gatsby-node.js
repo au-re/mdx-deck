@@ -29,25 +29,22 @@ export const onPreBootstrap = ({ store }, opts = {}) => {
   debug(`Initializing ${dirname} directory`)
 }
 
-const mdxResolverPassthrough = fieldName => async (
-  source,
-  args,
-  context,
-  info
-) => {
-  const type = info.schema.getType(`Mdx`)
-  const mdxNode = context.nodeModel.getNodeById({
-    id: source.parent,
-  })
-  const resolver = type.getFields()[fieldName].resolve
-  const result = await resolver(mdxNode, args, context, {
-    fieldName,
-  })
-  return result
-}
+const mdxResolverPassthrough =
+  (fieldName) => async (source, args, context, info) => {
+    const type = info.schema.getType(`Mdx`)
+    const mdxNode = context.nodeModel.getNodeById({
+      id: source.parent,
+    })
+    const resolver = type.getFields()[fieldName]?.resolve
+    if (!resolver) return null
+    const result = await resolver(mdxNode, args, context, {
+      fieldName,
+    })
+    return result
+  }
 
 const resolveTitle = async (...args) => {
-  const headings = await mdxResolverPassthrough('headings')(...args)
+  const headings = (await mdxResolverPassthrough('headings')(...args)) || []
   const [first = {}] = headings
   return first.value || ''
 }
@@ -75,7 +72,12 @@ export const createSchemaCustomization = ({ actions, schema }) => {
   )
 }
 
-export const createPages = async ({ graphql, actions, reporter, pathPrefix }) => {
+export const createPages = async ({
+  graphql,
+  actions,
+  reporter,
+  pathPrefix,
+}) => {
   const { createPage } = actions
 
   const result = await graphql(`
@@ -169,7 +171,7 @@ export const onCreateNode = ({
 }) => {
   const { createNode, createParentChildLink } = actions
 
-  const toPath = node => {
+  const toPath = (node) => {
     const { dir } = path.posix.parse(node.relativePath)
     return path.posix.join(basePath, dir, node.name)
   }
@@ -192,8 +194,8 @@ export const onCreateNode = ({
     children: [],
     internal: {
       type: `Deck`,
-      contentDigest: createContentDigest(node.rawBody),
-      content: node.rawBody,
+      contentDigest: node.internal.contentDigest,
+      content: node.internal.content || '',
       description: `Slide Decks`,
     },
   })
