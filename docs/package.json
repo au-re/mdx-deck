@@ -14,5 +14,8 @@
     "@emotion/styled": "^10.0.7",
     "mdx-deck": "^4.1.1",
     "styled-system": "^5.0.15"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }
